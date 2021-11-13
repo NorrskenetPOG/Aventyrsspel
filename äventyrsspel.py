@@ -55,7 +55,7 @@ def rooms():
 
 
 
-player = Player(5)
+player = Player(10)
 item = Item()
 
 while True:
