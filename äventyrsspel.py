@@ -140,6 +140,10 @@ enemies = Monster()
 player = Player(10)
 item = Item()
 
+character_name = str(input("""
+----------------------------------
+    Vad heter din karaktär -> """))
+
 while True:
     print("""
 ----------------------------------
@@ -157,6 +161,8 @@ Du är i ett rum med tre dörrar...
     if choice.strip() == "s" or choice == "S":
         print(f"""
 --------------
+{character_name}
+
     HP:  [{player.lifes}]
     STR: [{player.strenght}]
     LVL: [{player.current_level}]
