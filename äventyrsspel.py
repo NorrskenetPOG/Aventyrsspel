@@ -5,6 +5,7 @@ import random as rand
 class Player():
     def __init__(self, lifes):
         self.lifes = lifes
+        self.max_lifes = 10
         self.max_level = 10
         self.current_level = 0
         self.exp = 0
@@ -95,23 +96,36 @@ Vilken vill du byta ut 1-5 -> """)
 #Osäker på den här klassen, går nog att göra poå ett annat sätt
 class Monster():
     def __init__(self):
-        strenghts = range(0, 20)
-        self.monster_strenght = rand.choice(strenghts)
+        self.strenghts = range(0, 41)
+
     
     def monster_types(self):
+        self.monster_strenght = rand.choice(enemies.strenghts)
         self.monster_name = None
 
         if enemies.monster_strenght < 5:
-            self.monster_name = "Slime"
+            self.monster_name = "en Slime"
             return self.monster_name
         elif enemies.monster_strenght < 10 and enemies.monster_strenght >= 5:
-            self.monster_name = "Goblin"
+            self.monster_name = "en Goblin"
             return self.monster_name
         elif enemies.monster_strenght < 15 and enemies.monster_strenght >= 10:
-            self.monster_name = "Zombie"
+            self.monster_name = "ett Skelett"
             return self.monster_name
         elif enemies.monster_strenght < 20 and enemies.monster_strenght >= 15:
-            self.monster_name = "Basilisk"
+            self.monster_name = "ett Troll"
+            return self.monster_name
+        elif enemies.monster_strenght < 25 and enemies.monster_strenght >= 20:
+            self.monster_name = "en Minotaur"
+            return self.monster_name
+        elif enemies.monster_strenght < 30 and enemies.monster_strenght >= 25:
+            self.monster_name = "en Basilisk"
+            return self.monster_name
+        elif enemies.monster_strenght < 35 and enemies.monster_strenght >= 30:
+            self.monster_name = "en Golem"
+            return self.monster_name
+        elif enemies.monster_strenght <= 40 and enemies.monster_strenght >= 35:
+            self.monster_name = "en Drake"
             return self.monster_name
 
 
@@ -126,12 +140,16 @@ def rooms():
             item.pickup_items()
             break
         elif room_randomizer == 3:
-            print(f"Bakom dörren fanns en {enemies.monster_types()} som attackerar dig")
+            print(f"Bakom dörren fanns {enemies.monster_types()} som attackerar dig")
             break
         else:
             print("Du tog skada av en fälla bakom dörren och förlorade ett HP")
             player.player_hit()
             break
+
+def nollställ():
+    enemies.monster_name = None
+    return enemies.monster_name
 
 
 
@@ -141,8 +159,8 @@ player = Player(10)
 item = Item()
 
 character_name = str(input("""
-----------------------------------
-    Vad heter din karaktär -> """))
+------------------------------------------------------
+    Vad heter din karaktär för att starta -> """))
 
 while True:
     print("""
@@ -160,13 +178,12 @@ Du är i ett rum med tre dörrar...
     
     if choice.strip() == "s" or choice == "S":
         print(f"""
---------------
-{character_name}
+----------------
+{character_name}    LVL.{player.current_level}
 
-    HP:  [{player.lifes}]
+    HP:  [{player.lifes}/{player.max_lifes}]
     STR: [{player.strenght}]
-    LVL: [{player.current_level}]
---------------
+----------------
 """)
         
     elif choice == "i" or choice == "I":
@@ -186,10 +203,12 @@ Du är i ett rum med tre dörrar...
     elif choice == "m" or choice == "M":
         rooms()
         
-    elif choice == "" or choice == "H":
+    elif choice == "h" or choice == "H":
         rooms()
 
     elif player.current_level == player.max_level:
         print("Du har vunnit spelet")
-        break
 
+    elif player.lifes == 0:
+        print(f"{player.lifes}/{player.max_lifes} spel slut, du förlorade")
+        break
