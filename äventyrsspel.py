@@ -37,7 +37,7 @@ class Player():
 
 class Item():
     def __init__(self):
-        self.item_names = ["Diamantsvärd", "Gravitations pistol", "Energi svärd", "Skorpion spjut", "BFG-9000", "Styrke dryck", "Styrke emblem", "Railgun", "Blad av kaos", "Mästar svärd"]
+        self.item_names = ["Meme Blade", "Diamantsvärd", "Gravitationspistol", "Energisvärd", "Skorpionspjut", "BFG-9000", "Styrke-dryck", "Styrke-emblem", "Railgun", "Blad av kaos", "Mästar-svärd", "Köttbullsmacka", "Baguettespjut"]
         self.bonus_list = range(1, 10)
 
 
@@ -85,18 +85,25 @@ def rooms():
             player.chest()
             while True:
                 if len(player.inventory) == 5:
-                    print("Ditt inventory är fullt")
+                    print(f""""
+Ditt inventory är fullt
+--------------------------
+{player.show_inventory_for_switch()}
+--------------------------""")
                     player.chest()
-                    choice_inventory = input(f"Du måste slänga {player.inventory[5]} +{player.item_bonus_list[5]} STR som du hittade [S] eller byta ut det [B] -> ")
-                    if choice_inventory == "B" or "b":
+                    choice_inventory = input(f"Du måste slänga [{player.inventory[5]} +{player.item_bonus_list[5]}] STR som du hittade [S] eller byta ut det [B] -> ")
+                    if choice_inventory == "B" or choice_inventory == "b":
                         change_inventory = int(input(f"""
 Välj vilket vapen du vill byta ut 
+--------------------------
 {player.show_inventory_for_switch()} 
+--------------------------
 [0 - 4] -> """))
                         player.inventory.pop(change_inventory)
                         player.item_bonus_list.pop(change_inventory)
+                        
                         break
-                    if choice_inventory == "S" or "s":
+                    if choice_inventory == "S" or choice_inventory == "s":
                         player.inventory.pop(5)
                         player.item_bonus_list.pop(5) 
                         """verkar inte fungera"""
@@ -152,7 +159,7 @@ Du är i ett rum med tre dörrar...
 ----------------------------------""")
     choice = input("Gör ett val -> ")
     
-    if choice.strip() == "s" or choice == "S":
+    if choice == "s" or choice == "S":
         print(f"""
 ----------------
 {character_name}    LVL.{player.current_level}
