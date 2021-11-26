@@ -31,7 +31,7 @@ class Player():
             self.show_inventory2 += f"{i}. {t[0]} +{t[1]} STR\n"
         return self.show_inventory2
 
-    def pleayer_level_up(self):
+    def player_level_up(self):
         self.current_level += 1
 
 
@@ -82,31 +82,29 @@ def rooms():
     while True:
         if room_randomizer == 1:
             print(f"Bakom dörren fanns en kista med en skatt")
-            player.chest()
             while True:
-                if len(player.inventory) == 5:
+                player.chest()
+                if len(player.inventory) >= 6:
                     print(f""""
 Ditt inventory är fullt
 --------------------------
 {player.show_inventory_for_switch()}
 --------------------------""")
-                    player.chest()
-                    choice_inventory = input(f"Du måste slänga [{player.inventory[5]} +{player.item_bonus_list[5]}] STR som du hittade [S] eller byta ut det [B] -> ")
+                    choice_inventory = input(f"Du måste slänga [{player.inventory[5]} +{player.item_bonus_list[5]} STR] som du hittade [S] eller byta ut det [B] -> ")
                     if choice_inventory == "B" or choice_inventory == "b":
                         change_inventory = int(input(f"""
 Välj vilket vapen du vill byta ut 
 --------------------------
 {player.show_inventory_for_switch()} 
---------------------------
 [0 - 4] -> """))
+                        print(f"Du bytte [{player.inventory[change_inventory]} +{player.item_bonus_list[change_inventory]}] mot [{player.inventory[5]} +{player.item_bonus_list[5]} ST]")
                         player.inventory.pop(change_inventory)
                         player.item_bonus_list.pop(change_inventory)
-                        
                         break
                     if choice_inventory == "S" or choice_inventory == "s":
+                        print(f"Du slängde [{player.inventory[5]} +{player.item_bonus_list[5]} STR]")
                         player.inventory.pop(5)
-                        player.item_bonus_list.pop(5) 
-                        """verkar inte fungera"""
+                        player.item_bonus_list.pop(5)
                         break
                     break
                 else:
@@ -120,11 +118,11 @@ Välj vilket vapen du vill byta ut
             while True:
                 if enemies.monster_strenght > player.strenght + sum(player.item_bonus_list):
                     player.player_hit()
-                    print(f"Du förlorade mot {enemies.monster_name}")
+                    print(f"Du förlorade mot {enemies.monster_name}, -1 HP")
                     break
                 else:
-                    print(f"Du besegrade {enemies.monster_name}")
-                    player.pleayer_level_up()
+                    print(f"Du besegrade {enemies.monster_name}, +1 LVL")
+                    player.player_level_up()
                     break
             break
                 
