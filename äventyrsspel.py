@@ -1,104 +1,50 @@
-#Äventyrsspel POGchamp
-
 import random as rand
 
 class Player():
     def __init__(self, lifes):
         self.lifes = lifes
-        self.max_lifes = 10
         self.max_level = 10
         self.current_level = 0
         self.exp = 0
         self.strenght = 5
+        self.inventory = []
+        self.item_bonus_list = []
 
     def player_hit(self):
         self.lifes -= 1
+        
+    def chest(self):
+        self.inventory.append(str(rand.choice(item.item_names)))
+        self.item_bonus_list.append(int(rand.choice(item.bonus_list)))
+    
+    def show_inventory(self):
+        self.show_inventory1 = ""
+        l = zip(player.inventory, player.item_bonus_list)
+        for i, t in enumerate(l):
+            self.show_inventory1 += f"{i}. {t[0]} +{t[1]} STR\n"
+        return self.show_inventory1
 
-    def player_level_up(self):
-        self.exp += 1
-        if self.exp >= 5:
-            self.current_level += 1
+    def show_inventory_for_switch(self):
+        self.show_inventory2 = ""
+        l = zip(player.inventory[0:5], player.item_bonus_list[0:5])
+        for i, t in enumerate(l):
+            self.show_inventory2 += f"{i}. {t[0]} +{t[1]} STR\n"
+        return self.show_inventory2
+
+    def pleayer_level_up(self):
+        self.current_level += 1
+
 
 class Item():
     def __init__(self):
-        self.item_1 = None
-        self.item_2 = None
-        self.item_3 = None
-        self.item_4 = None
-        self.item_5 = None
-
-        self.bonus_list = range(1, 20)
-
-        self.bonus_1 = None
-        self.bonus_2 = None
-        self.bonus_3 = None
-        self.bonus_4 = None
-        self.bonus_5 = None
-    
-        self.item_list = ["Diamantsvärd", "Gravitations pistol", "Energi svärd", "Skorpion spjut", "BFG-9000", "Styrke dryck", "Styrke emblem", "Railgun", "Blad av kaos", "Mästar svärd"]
-
-    def pickup_items(self):
-        self.random_item = rand.choice(item.item_list)
-        print(self.random_item)
-        while True:
-            if item.item_1 == None:
-                item.item_1 == item.random_item and item.bonus_1 == rand.choice(item.bonus_list)
-                return item.item_1 and item.bonus_1
-            elif item.item_2 == None:
-                item.item_2 == item.random_item and item.bonus_2 == rand.choice(item.bonus_list)
-                return item.item_2 and item.bonus_2
-            elif item.item_3 == None:
-                item.item_3 == item.random_item and item.bonus_3 == rand.choice(item.bonus_list)
-                return item.item_3 and item.bonus_3
-            elif item.item_4 == None:
-                item.item_4 == item.random_item and item.bonus_4 == rand.choice(item.bonus_list)
-                return item.item_4 and item.bonus_4
-            elif item.item_5 == None:
-                item.item_5 == item.random_item and item.bonus_5 == rand.choice(item.bonus_list)
-                return item.item_5 and item.bonus_5
-            else:
-                print("Ditt inventory är fullt")
-                item_choise = int(input("Vill du slänga bort [S] eller byta ut föremålet [B] -> "))
-                if item_choise == "S" or item_choise == "s":
-                    print(f"Du slägde bort {self.random_item} och fortsatte")
-                elif item_choise == "B" or item_choise == "b":
-                    replace_item = input(f"""
---------------------------
-1.    [{item.item_1}] +{item.bonus_1} STR
-2.    [{item.item_2}] +{item.bonus_2} STR
-3.    [{item.item_3}] +{item.bonus_3} STR
-4.    [{item.item_4}] +{item.bonus_4} STR
-5.    [{item.item_5}] +{item.bonus_5} STR
---------------------------
-Vilken vill du byta ut 1-5 -> """)
-                    if replace_item == 1:
-                        item.item_1 == item.random_item and item.bonus_1 == rand.choice(item.bonus_list)
-                        return item.item_1 and item.bonus_1
-                    elif replace_item == 2:
-                        item.item_2 == item.random_item and item.bonus_2 == rand.choice(item.bonus_list)
-                        return item.item_2 and item.bonus_2
-                    elif replace_item == 3:
-                        item.item_3 == item.random_item and item.bonus_3 == rand.choice(item.bonus_list)
-                        return item.item_3 and item.bonus_3
-                    elif replace_item == 4:
-                        item.item_4 == item.random_item and item.bonus_4 == rand.choice(item.bonus_list)
-                        return item.item_4 and item.bonus_4
-                    elif replace_item == 5:
-                        item.item_5 == item.random_item and item.bonus_5 == rand.choice(item.bonus_list)
-                        return item.item_5 and item.bonus_5
-                else:
-                    print("Fel inmatning")
-                    break
-                break
+        self.item_names = ["Diamantsvärd", "Gravitations pistol", "Energi svärd", "Skorpion spjut", "BFG-9000", "Styrke dryck", "Styrke emblem", "Railgun", "Blad av kaos", "Mästar svärd"]
+        self.bonus_list = range(1, 10)
 
 
-
-#Osäker på den här klassen, går nog att göra poå ett annat sätt
 class Monster():
     def __init__(self):
-        self.strenghts = range(0, 41)
+        self.strenghts = range(0, 23)
 
-    
     def monster_types(self):
         self.monster_strenght = rand.choice(enemies.strenghts)
         self.monster_name = None
@@ -106,28 +52,27 @@ class Monster():
         if enemies.monster_strenght < 5:
             self.monster_name = "en Slime"
             return self.monster_name
-        elif enemies.monster_strenght < 10 and enemies.monster_strenght >= 5:
+        elif enemies.monster_strenght < 8 and enemies.monster_strenght >= 5:
             self.monster_name = "en Goblin"
             return self.monster_name
-        elif enemies.monster_strenght < 15 and enemies.monster_strenght >= 10:
+        elif enemies.monster_strenght < 11 and enemies.monster_strenght >= 8:
             self.monster_name = "ett Skelett"
             return self.monster_name
-        elif enemies.monster_strenght < 20 and enemies.monster_strenght >= 15:
+        elif enemies.monster_strenght < 14 and enemies.monster_strenght >= 11:
             self.monster_name = "ett Troll"
             return self.monster_name
-        elif enemies.monster_strenght < 25 and enemies.monster_strenght >= 20:
+        elif enemies.monster_strenght < 17 and enemies.monster_strenght >= 14:
             self.monster_name = "en Minotaur"
             return self.monster_name
-        elif enemies.monster_strenght < 30 and enemies.monster_strenght >= 25:
+        elif enemies.monster_strenght < 20 and enemies.monster_strenght >= 17:
             self.monster_name = "en Basilisk"
             return self.monster_name
-        elif enemies.monster_strenght < 35 and enemies.monster_strenght >= 30:
+        elif enemies.monster_strenght < 22 and enemies.monster_strenght >= 20:
             self.monster_name = "en Golem"
             return self.monster_name
-        elif enemies.monster_strenght <= 40 and enemies.monster_strenght >= 35:
+        elif enemies.monster_strenght <= 24 and enemies.monster_strenght >= 22:
             self.monster_name = "en Drake"
             return self.monster_name
-
 
 
 def rooms():
@@ -137,26 +82,57 @@ def rooms():
     while True:
         if room_randomizer == 1:
             print(f"Bakom dörren fanns en kista med en skatt")
-            item.pickup_items()
+            player.chest()
+            while True:
+                if len(player.inventory) == 5:
+                    print("Ditt inventory är fullt")
+                    player.chest()
+                    choice_inventory = input(f"Du måste slänga {player.inventory[5]} +{player.item_bonus_list[5]} STR som du hittade [S] eller byta ut det [B] -> ")
+                    if choice_inventory == "B" or "b":
+                        change_inventory = int(input(f"""
+Välj vilket vapen du vill byta ut 
+{player.show_inventory_for_switch()} 
+[0 - 4] -> """))
+                        player.inventory.pop(change_inventory)
+                        player.item_bonus_list.pop(change_inventory)
+                        break
+                    if choice_inventory == "S" or "s":
+                        player.inventory.pop(5)
+                        player.item_bonus_list.pop(5) 
+                        """verkar inte fungera"""
+                        break
+                    break
+                else:
+                    break
+                            
+                        
             break
         elif room_randomizer == 3:
+
             print(f"Bakom dörren fanns {enemies.monster_types()} som attackerar dig")
+            while True:
+                if enemies.monster_strenght > player.strenght + sum(player.item_bonus_list):
+                    player.player_hit()
+                    print(f"Du förlorade mot {enemies.monster_name}")
+                    break
+                else:
+                    print(f"Du besegrade {enemies.monster_name}")
+                    player.pleayer_level_up()
+                    break
             break
+                
         else:
             print("Du tog skada av en fälla bakom dörren och förlorade ett HP")
             player.player_hit()
             break
 
-def nollställ():
-    enemies.monster_name = None
-    return enemies.monster_name
 
-
-
-
-enemies = Monster()
 player = Player(10)
 item = Item()
+enemies = Monster()
+max_lifes = 10
+
+#inventory_list = ["%i: %s" % (index, value) for index, value in enumerate(player.inventory + player.item_bonus_list)]
 
 character_name = str(input("""
 ------------------------------------------------------
@@ -181,21 +157,18 @@ Du är i ett rum med tre dörrar...
 ----------------
 {character_name}    LVL.{player.current_level}
 
-    HP:  [{player.lifes}/{player.max_lifes}]
-    STR: [{player.strenght}]
+    HP:  [{player.lifes}/{max_lifes}]
+    STR: [{player.strenght + sum(player.item_bonus_list)}]
 ----------------
 """)
         
     elif choice == "i" or choice == "I":
         print(f"""
 --------------------------
-1.    [{item.item_1}] +{item.bonus_1} STR
-2.    [{item.item_2}] +{item.bonus_2} STR
-3.    [{item.item_3}] +{item.bonus_3} STR
-4.    [{item.item_4}] +{item.bonus_4} STR
-5.    [{item.item_5}] +{item.bonus_5} STR
---------------------------
-""")
+Inventory
+
+{player.show_inventory()}
+--------------------------""")
 
     elif choice == "v" or choice == "V":
         rooms()
@@ -206,9 +179,11 @@ Du är i ett rum med tre dörrar...
     elif choice == "h" or choice == "H":
         rooms()
 
-    elif player.current_level == player.max_level:
+    if player.current_level == player.max_level:
         print("Du har vunnit spelet")
 
-    elif player.lifes == 0:
-        print(f"{player.lifes}/{player.max_lifes} spel slut, du förlorade")
+        break
+
+    if player.lifes == 0:
+        print(f"{player.lifes}/{max_lifes} HP kvar, spel slut, du förlorade")
         break
