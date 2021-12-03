@@ -91,7 +91,7 @@ def rooms():
                     choice_inventory = input(f"Du måste slänga [{player.inventory[5]} +{player.item_bonus[5]} STR] som du hittade [S] eller byta ut det [B] -> ")
                     if choice_inventory == "B" or choice_inventory == "b":
                         clear_screen()
-                        delay_print(f"\nVälj vilket vapen du vill byta ut")
+                        delay_print(f"\nVälj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]")
                         print(f"\n--------------------------\n{player.show_inventory_switch()}")
                         change_inventory = int(input(delay_print(f"\n[0 - 4] -> ")))
                         if change_inventory >= 0 and change_inventory <= 4:
@@ -105,7 +105,7 @@ def rooms():
                             continue
                     if choice_inventory == "S" or choice_inventory == "s":
                         clear_screen()
-                        delay_print(f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]")
+                        delay_print(f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
                         player.inventory.pop(5)
                         player.item_bonus.pop(5)
                         break
