@@ -183,7 +183,7 @@ while True:
         continue
 
     if player.current_level == player.max_level:
-        print("Du har vunnit spelet")
+        delay_print(f"\nGrattis, du har VUNNIT spelet")
         break
 
     if player.lifes == 0:
