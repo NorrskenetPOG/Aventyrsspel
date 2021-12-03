@@ -1,4 +1,5 @@
-import random as rand
+import random as rand,sys,time
+from os import system
 
 class Player():
     def __init__(self, lifes):
@@ -80,32 +81,30 @@ def rooms():
     room_randomizer = rand.choice(room_list)
 
     while True:
+        clear_screen()
         if room_randomizer == 1:
-            print(f"Bakom dörren fanns en kista med en skatt")
+            delay_print(f"Bakom dörren fanns en kista med en skatt")
             while True:
                 player.chest()
                 if len(player.inventory) >= 6:
-                    print(f""""
-Ditt inventory är fullt
---------------------------
-{player.show_inventory_for_switch()}
---------------------------""")
+                    print(f"\nDitt inventory är fullt\n--------------------------\n{player.show_inventory_for_switch()}\n--------------------------")
                     choice_inventory = input(f"Du måste slänga [{player.inventory[5]} +{player.item_bonus_list[5]} STR] som du hittade [S] eller byta ut det [B] -> ")
                     if choice_inventory == "B" or choice_inventory == "b":
-                        change_inventory = int(input(f"""
-Välj vilket vapen du vill byta ut 
---------------------------
-{player.show_inventory_for_switch()} 
-[0 - 4] -> """))
-                        print(f"Du bytte [{player.inventory[change_inventory]} +{player.item_bonus_list[change_inventory]}] mot [{player.inventory[5]} +{player.item_bonus_list[5]} ST]")
+                        clear_screen()
+                        change_inventory = int(input(delay_print(f"\nVälj vilket vapen du vill byta ut \n--------------------------\n{player.show_inventory_for_switch()} \n[0 - 4] -> ")))
+                        clear_screen()
+                        delay_print(f"Du bytte [{player.inventory[change_inventory]} +{player.item_bonus_list[change_inventory]}] mot [{player.inventory[5]} +{player.item_bonus_list[5]} ST]")
                         player.inventory.pop(change_inventory)
                         player.item_bonus_list.pop(change_inventory)
                         break
                     if choice_inventory == "S" or choice_inventory == "s":
-                        print(f"Du slängde [{player.inventory[5]} +{player.item_bonus_list[5]} STR]")
+                        clear_screen()
+                        delay_print(f"Du slängde [{player.inventory[5]} +{player.item_bonus_list[5]} STR]")
                         player.inventory.pop(5)
                         player.item_bonus_list.pop(5)
                         break
+                    else:
+                        continue
                     break
                 else:
                     break
@@ -114,66 +113,52 @@ Välj vilket vapen du vill byta ut
             break
         elif room_randomizer == 3:
 
-            print(f"Bakom dörren fanns {enemies.monster_types()} som attackerar dig")
+            delay_print(f"Bakom dörren fanns {enemies.monster_types()} som attackerar dig")
             while True:
                 if enemies.monster_strenght > player.strenght + sum(player.item_bonus_list):
                     player.player_hit()
-                    print(f"Du förlorade mot {enemies.monster_name}, -1 HP")
+                    delay_print(f"\nDu förlorade mot {enemies.monster_name}, -1 HP")
                     break
                 else:
-                    print(f"Du besegrade {enemies.monster_name}, +1 LVL")
+                    delay_print(f"\nDu besegrade {enemies.monster_name}, +1 LVL")
                     player.player_level_up()
                     break
             break
                 
         else:
-            print("Du tog skada av en fälla bakom dörren och förlorade ett HP")
+            delay_print("Du tog skada av en fälla, -1 HP")
             player.player_hit()
             break
 
+def clear_screen():
+    system("cls || clear")
+
+def delay_print(meningar):
+    for tecken in meningar:
+        sys.stdout.write(tecken)
+        sys.stdout.flush()
+        time.sleep(0.1)
+    return ""
 
 player = Player(10)
 item = Item()
 enemies = Monster()
 max_lifes = 10
 
-#inventory_list = ["%i: %s" % (index, value) for index, value in enumerate(player.inventory + player.item_bonus_list)]
-
-character_name = str(input("""
-------------------------------------------------------
-    Vad heter din karaktär för att starta -> """))
+character_name = str(input(delay_print("\nVad heter din karaktär?\nSkriv in för att starta -> ")))
+clear_screen()
 
 while True:
-    print("""
-----------------------------------
-Du är i ett rum med tre dörrar...
-    
-    Se spelarinfo              [S]
-    Öppna inventory            [I]
-
-    Gå genom vänster dörr      [V]
-    Gå genom mitten dörren     [M]
-    Gå genom höger dörr        [H]
-----------------------------------""")
-    choice = input("Gör ett val -> ")
+    print("\n----------------------------------\nDu är i ett rum med tre dörrar...\n\n    Se spelarinfo              [S]\n    Öppna inventory            [I]\n    Gå genom vänster dörr      [V]\n    Gå genom mitten dörren     [M]\n    Gå genom höger dörr        [H]\n----------------------------------")
+    choice = input(delay_print("Gör ett val -> "))
     
     if choice == "s" or choice == "S":
-        print(f"""
-----------------
-{character_name}    LVL.{player.current_level}
-
-    HP:  [{player.lifes}/{max_lifes}]
-    STR: [{player.strenght + sum(player.item_bonus_list)}]
-----------------
-""")
+        clear_screen()
+        print(f"\n----------------\n{character_name}    LVL.{player.current_level}\n\nHP:  [{player.lifes}/{max_lifes}]\nSTR: [{player.strenght + sum(player.item_bonus_list)}]\n----------------")
         
     elif choice == "i" or choice == "I":
-        print(f"""
---------------------------
-Inventory
-
-{player.show_inventory()}
---------------------------""")
+        clear_screen()
+        print(f"\n--------------------------\nInventory\n\n{player.show_inventory()}\n--------------------------")
 
     elif choice == "v" or choice == "V":
         rooms()
@@ -186,9 +171,8 @@ Inventory
 
     if player.current_level == player.max_level:
         print("Du har vunnit spelet")
-
         break
 
     if player.lifes == 0:
-        print(f"{player.lifes}/{max_lifes} HP kvar, spel slut, du förlorade")
+        print(f"\n{player.lifes}/{max_lifes} HP kvar, spel slut, du förlorade")
         break
