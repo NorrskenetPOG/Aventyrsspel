@@ -35,12 +35,10 @@ class Player():
     def player_level_up(self):
         self.current_level += 1
 
-
 class Item():
     def __init__(self):
         self.item_names = ["Meme Blade", "Diamantsvärd", "Gravitationspistol", "Energisvärd", "Skorpionspjut", "BFG-9000", "Styrke-dryck", "Styrke-emblem", "Railgun", "Blad av kaos", "Mästar-svärd", "Köttbullsmacka", "Baguettespjut"]
         self.bonus_range = range(1, 6)
-
 
 class Monster():
     def __init__(self):
@@ -74,7 +72,6 @@ class Monster():
         elif monster.monster_strenght <= 24 and monster.monster_strenght >= 22:
             self.monster_name = "en Drake"
             return self.monster_name
-
 
 def rooms():
     room_list = [1, 2, 3, 4, 5]
@@ -112,14 +109,11 @@ def rooms():
                     else:
                         clear_screen()
                         continue
-                    break
                 else:
-                    break
-                            
-                        
+                    break                  
             break
-        elif room_randomizer == 3 or room_randomizer == 4:
 
+        elif room_randomizer == 3 or room_randomizer == 4:
             delay_print(f"Bakom dörren fanns {monster.monster_types()} som attackerar dig")
             while True:
                 if monster.monster_strenght > player.strenght + sum(player.item_bonus):
@@ -131,7 +125,7 @@ def rooms():
                     player.player_level_up()
                     break
             break
-                
+
         else:
             delay_print("Du tog skada av en fälla, -1 HP\n")
             player.player_hit()
