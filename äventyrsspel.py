@@ -30,7 +30,7 @@ class Player():
 
 class Item():
     def __init__(self):
-        self.item_names = ["Meme Blade", "Diamantsvärd", "Gravitationspistol", "Energisvärd", "Skorpionspjut", "BFG-9000", "Styrke-dryck", "Styrke-emblem", "Railgun", "Blad av kaos", "Mästar-svärd", "Köttbullsmacka", "Baguettespjut"]
+        self.item_names = ["Meme Blade", "Diamondsword", "Gravitygun", "Energisvärd", "Pizzaskärare", "BFG-9000", "Styrke-dryck", "Styrke-emblem", "Railgun", "Blades of kaos", "Matersword", "Köttbullsmacka", "Baguettespjut"]
         self.bonus_range = range(1, 6)
 
 class Monster():
