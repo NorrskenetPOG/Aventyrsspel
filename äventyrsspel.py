@@ -131,7 +131,7 @@ def delay_print(meningar):
     for tecken in meningar:
         sys.stdout.write(tecken)
         sys.stdout.flush()
-        time.sleep(0.035)
+        time.sleep(0.03)
     return ""
 
 player = Player(10)
