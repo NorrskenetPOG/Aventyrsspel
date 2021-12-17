@@ -22,7 +22,7 @@ class Player():
         self.inventory_layout = ""
         lists = zip(player.inventory[0:5], player.item_bonus[0:5])
         for index, list_content in enumerate(lists):
-            self.inventory_layout += f"{index}. {list_content[0]} +{list_content[1]} STR\n"
+            self.inventory_layout += f"\n{index}. {list_content[0]} +{list_content[1]} STR"
         return self.inventory_layout
 
     def player_level_up(self):
@@ -149,23 +149,23 @@ clear_screen()
 
 while True:
     print("\n--------------------------------------------\nDu har kommit till ett rum med tre dörrar...\n\n    Se spelarinfo                    [S]\n    Öppna inventory                  [I]\n    Gå genom vänster dörr            [V]\n    Gå genom mitten dörren           [M]\n    Gå genom höger dörr              [H]\n--------------------------------------------")
-    choice = input(delay_print("Gör ett val -> "))
+    choice = input(delay_print("Gör ett val -> ")).lower()
     
-    if choice == "s" or choice == "S":
+    if choice == "s":
         clear_screen()
         print(f"\n----------------\n{character_name}    LVL.{player.current_level}\n\nHP:  [{player.lifes}/{max_lifes}]\nSTR: [{player.strenght + sum(player.item_bonus)}]\n----------------")
         
-    elif choice == "i" or choice == "I":
+    elif choice == "i":
         clear_screen()
-        print(f"\n--------------------------\nInventory\n\n{player.show_inventory()}\n--------------------------")
+        print(f"\n--------------------------\nInventory\n{player.show_inventory()}\n--------------------------")
 
-    elif choice == "v" or choice == "V":
+    elif choice == "v":
         rooms()
 
-    elif choice == "m" or choice == "M":
+    elif choice == "m":
         rooms()
         
-    elif choice == "h" or choice == "H":
+    elif choice == "h":
         rooms()
     
     else:
