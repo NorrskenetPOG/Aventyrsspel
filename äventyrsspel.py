@@ -19,11 +19,11 @@ class Player():
         self.item_bonus.append(int(rand.choice(item.bonus_range)))
     
     def show_inventory(self):
-        self.inevntory_layout = ""
+        self.inventory_layout = ""
         lists = zip(player.inventory[0:5], player.item_bonus[0:5])
         for index, list_content in enumerate(lists):
-            self.inevntory_layout += f"{index}. {list_content[0]} +{list_content[1]} STR\n"
-        return self.inevntory_layout
+            self.inventory_layout += f"{index}. {list_content[0]} +{list_content[1]} STR\n"
+        return self.inventory_layout
 
     def player_level_up(self):
         self.current_level += 1
@@ -80,19 +80,22 @@ def rooms():
                     print(f"\nDitt inventory är fullt\n--------------------------\n{player.show_inventory()}")
                     choice_inventory = input(f"Du måste slänga [{player.inventory[5]} +{player.item_bonus[5]} STR] som du hittade [S] eller byta ut det [B] -> ")
                     if choice_inventory == "B" or choice_inventory == "b":
-                        clear_screen()
-                        delay_print(f"\nVälj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
-                        print(f"\n--------------------------\n{player.show_inventory()}")
-                        change_inventory = int(input(delay_print(f"[0 - 4] -> ")))
-                        if change_inventory >= 0 and change_inventory <= 4:
+                        while True:
                             clear_screen()
-                            delay_print(f"\nDu bytte [{player.inventory[change_inventory]} +{player.item_bonus[change_inventory]}] mot [{player.inventory[5]} +{player.item_bonus[5]} STR\n")
-                            player.inventory.pop(change_inventory)
-                            player.item_bonus.pop(change_inventory)
-                            break
-                        else:
-                            clear_screen()
-                            continue
+                            print(f"\nVälj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
+                            print(f"\n--------------------------\n{player.show_inventory()}")
+                            change_inventory = str(input(delay_print(f"[0 - 4] -> ")))
+                            if change_inventory == "0" or change_inventory == "1" or change_inventory == "2" or change_inventory == "3" or change_inventory == "4":
+                                clear_screen()
+                                inventory_index_to_pop = int(change_inventory)
+                                print(f"\nDu bytte [{player.inventory[inventory_index_to_pop]} +{player.item_bonus[inventory_index_to_pop]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
+                                player.inventory.pop(inventory_index_to_pop)
+                                player.item_bonus.pop(inventory_index_to_pop)
+                                break
+                            else:
+                                clear_screen()
+                                continue
+                        break   
                     if choice_inventory == "S" or choice_inventory == "s":
                         clear_screen()
                         delay_print(f"\nDu slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
@@ -131,7 +134,7 @@ def delay_print(meningar):
     for tecken in meningar:
         sys.stdout.write(tecken)
         sys.stdout.flush()
-        time.sleep(0.03)
+        time.sleep(0.005)
     return ""
 
 player = Player(10)
