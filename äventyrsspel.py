@@ -73,22 +73,22 @@ def rooms():
     while True:
         clear_screen()
         if room_randomizer == 1 or room_randomizer == 2:
-            delay_print(f"\nBakom dörren fanns en kista med en skatt\n")
+            delay_print(f"Bakom dörren fanns en kista med en skatt\n")
             while True:
                 player.chest()
                 if len(player.inventory) >= 6:
-                    print(f"\nDitt inventory är fullt\n--------------------------\n{player.show_inventory()}")
-                    choice_inventory = input(f"Du måste slänga [{player.inventory[5]} +{player.item_bonus[5]} STR] som du hittade [S] eller byta ut det [B] -> ")
+                    print(f"Ditt inventory är fullt\n\n--------------------------\n{player.show_inventory()}")
+                    choice_inventory = input(f"\nDu måste slänga [{player.inventory[5]} +{player.item_bonus[5]} STR] som du hittade [S] eller byta ut det [B] -> ")
                     if choice_inventory == "B" or choice_inventory == "b":
                         while True:
                             clear_screen()
-                            print(f"\nVälj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
-                            print(f"\n--------------------------\n{player.show_inventory()}")
-                            change_inventory = str(input(delay_print(f"[0 - 4] -> ")))
+                            print(f"Välj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
+                            print(f"--------------------------\n{player.show_inventory()}")
+                            change_inventory = str(input(delay_print(f"\n[0 - 4] -> ")))
                             if change_inventory == "0" or change_inventory == "1" or change_inventory == "2" or change_inventory == "3" or change_inventory == "4":
                                 clear_screen()
                                 inventory_index_to_pop = int(change_inventory)
-                                print(f"\nDu bytte [{player.inventory[inventory_index_to_pop]} +{player.item_bonus[inventory_index_to_pop]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
+                                print(f"Du bytte [{player.inventory[inventory_index_to_pop]} +{player.item_bonus[inventory_index_to_pop]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]")
                                 player.inventory.pop(inventory_index_to_pop)
                                 player.item_bonus.pop(inventory_index_to_pop)
                                 break
@@ -98,7 +98,7 @@ def rooms():
                         break   
                     if choice_inventory == "S" or choice_inventory == "s":
                         clear_screen()
-                        delay_print(f"\nDu slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
+                        delay_print(f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
                         player.inventory.pop(5)
                         player.item_bonus.pop(5)
                         break
@@ -110,7 +110,7 @@ def rooms():
             break
 
         elif room_randomizer == 3 or room_randomizer == 4:
-            delay_print(f"\nBakom dörren fanns {monster.monster_types()} som attackerar dig")
+            delay_print(f"Bakom dörren fanns {monster.monster_types()} som attackerar dig")
             while True:
                 if monster.monster_strenght > player.strenght + sum(player.item_bonus):
                     player.player_hit()
@@ -123,7 +123,7 @@ def rooms():
             break
 
         else:
-            delay_print("\nDu tog skada av en fälla, -1 HP\n")
+            delay_print("Du tog skada av en fälla, -1 HP\n")
             player.player_hit()
             break
 
@@ -144,7 +144,7 @@ max_lifes = 10
 
 print("\033[1;32;40m")
 clear_screen()
-character_name = str(input(delay_print("\nVad heter din karaktär?\nSkriv in för att starta -> ")))
+character_name = str(input(delay_print("Vad heter din karaktär?\nSkriv in för att starta -> ")))
 clear_screen()
 
 while True:
@@ -153,11 +153,11 @@ while True:
     
     if choice == "s":
         clear_screen()
-        print(f"\n----------------\n{character_name}    LVL.{player.current_level}\n\nHP:  [{player.lifes}/{max_lifes}]\nSTR: [{player.strenght + sum(player.item_bonus)}]\n----------------")
+        print(f"----------------\n{character_name}    LVL.{player.current_level}\n\nHP:  [{player.lifes}/{max_lifes}]\nSTR: [{player.strenght + sum(player.item_bonus)}]\n----------------")
         
     elif choice == "i":
         clear_screen()
-        print(f"\n--------------------------\nInventory\n{player.show_inventory()}\n--------------------------")
+        print(f"--------------------------\nInventory\n{player.show_inventory()}\n--------------------------")
 
     elif choice == "v":
         rooms()
