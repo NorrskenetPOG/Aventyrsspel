@@ -1,6 +1,6 @@
 import random as rand,sys,time,pygame
 from os import system
-from pygame.constants import K_0, K_1, K_2, K_3, K_4, K_RETURN, K_b, K_g, K_h, K_i, K_m, K_o, K_s, K_u, K_v, K_w, K_x
+from pygame.constants import K_0, K_1, K_2, K_3, K_4, K_RETURN, K_b, K_h, K_i, K_m, K_s, K_v
 
 pygame.init()
 
@@ -103,37 +103,97 @@ def rooms():
                                 while True:
                                     for event in pygame.event.get():
                                         if event.type == pygame.KEYDOWN:
-                                            if event.key == K_0 or event.key == K_1 or event.key == K_2 or event.key == K_3 or event.key == K_4:
-                                                print(player.inventory[5])
-                                                inventory_index_to_pop = int(event.key)
-                                                print("nummer har tryckts")
+                                            if event.key == K_0:
                                                 screen.blit(b1 , (0,0))
-                                                input_rect = pygame.Rect(10,10,730,160)
+                                                input_rect = pygame.Rect(10,10,730,40)
                                                 pygame.draw.rect(screen,color,input_rect,False ,10)
                                                 pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                                blitlines(screen, f"\nDu bytte [{player.inventory[inventory_index_to_pop]} +{player.item_bonus[inventory_index_to_pop]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]          -ENTER", userfont, textcolor, 20, 850)
+                                                blitlines(screen, f"Du bytte [{player.inventory[0]} +{player.item_bonus[0]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
+                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
                                                 pygame.display.update()
                                                 clear_screen()
-                                                player.inventory.pop(inventory_index_to_pop)
-                                                player.item_bonus.pop(inventory_index_to_pop)
+                                                player.inventory.pop(0)
+                                                player.item_bonus.pop(0)
                                                 while True:
                                                     for event in pygame.event.get():
                                                         if event.type == pygame.KEYDOWN:
                                                             if event.key == K_RETURN:
-                                                                print("enter")
-                                                                return              
+                                                                return
+                                            if event.key == K_1:
+                                                screen.blit(b1 , (0,0))
+                                                input_rect = pygame.Rect(10,10,730,40)
+                                                pygame.draw.rect(screen,color,input_rect,False ,10)
+                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
+                                                blitlines(screen, f"Du bytte [{player.inventory[1]} +{player.item_bonus[1]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
+                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
+                                                pygame.display.update()
+                                                clear_screen()
+                                                player.inventory.pop(1)
+                                                player.item_bonus.pop(1)
+                                                while True:
+                                                    for event in pygame.event.get():
+                                                        if event.type == pygame.KEYDOWN:
+                                                            if event.key == K_RETURN:
+                                                                return
+                                            if event.key == K_2:
+                                                screen.blit(b1 , (0,0))
+                                                input_rect = pygame.Rect(10,10,730,40)
+                                                pygame.draw.rect(screen,color,input_rect,False ,10)
+                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
+                                                blitlines(screen, f"Du bytte [{player.inventory[2]} +{player.item_bonus[2]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
+                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
+                                                pygame.display.update()
+                                                clear_screen()
+                                                player.inventory.pop(2)
+                                                player.item_bonus.pop(2)
+                                                while True:
+                                                    for event in pygame.event.get():
+                                                        if event.type == pygame.KEYDOWN:
+                                                            if event.key == K_RETURN:
+                                                                return
+                                            if event.key == K_3:
+                                                screen.blit(b1 , (0,0))
+                                                input_rect = pygame.Rect(10,10,730,40)
+                                                pygame.draw.rect(screen,color,input_rect,False ,10)
+                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
+                                                blitlines(screen, f"Du bytte [{player.inventory[3]} +{player.item_bonus[3]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
+                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
+                                                pygame.display.update()
+                                                clear_screen()
+                                                player.inventory.pop(3)
+                                                player.item_bonus.pop(3)
+                                                while True:
+                                                    for event in pygame.event.get():
+                                                        if event.type == pygame.KEYDOWN:
+                                                            if event.key == K_RETURN:
+                                                                return
+                                            if event.key == K_4:
+                                                screen.blit(b1 , (0,0))
+                                                input_rect = pygame.Rect(10,10,730,40)
+                                                pygame.draw.rect(screen,color,input_rect,False ,10)
+                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
+                                                blitlines(screen, f"Du bytte [{player.inventory[4]} +{player.item_bonus[4]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
+                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
+                                                pygame.display.update()
+                                                clear_screen()
+                                                player.inventory.pop(4)
+                                                player.item_bonus.pop(4)
+                                                while True:
+                                                    for event in pygame.event.get():
+                                                        if event.type == pygame.KEYDOWN:
+                                                            if event.key == K_RETURN:
+                                                                return
                                         else:
                                             continue
          
                         if event.type == pygame.KEYDOWN:
                             if event.key == K_s:
-                                print(f"\nDu slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
-                                clear_screen()
                                 screen.blit(b1 , (0,0))
                                 input_rect = pygame.Rect(10,10,730,40)
                                 pygame.draw.rect(screen,color,input_rect,False ,10)
                                 pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                blitlines(screen, f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]          -ENTER", userfont, textcolor, 20, 850)
+                                blitlines(screen, f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
+                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
                                 pygame.display.update()
                                 player.inventory.pop(5)
                                 player.item_bonus.pop(5)
@@ -141,11 +201,9 @@ def rooms():
                                     for event in pygame.event.get():
                                         if event.type == pygame.KEYDOWN:
                                             if event.key == K_RETURN:
-                                                print("enter")
                                                 return
 
             else:
-                print(f"\nBakom dörren fanns en kista med en skatt\n")
                 while True:
                     screen.blit(b1 , (0,0))
                     input_rect = pygame.Rect(10,10,730,40)
@@ -156,50 +214,58 @@ def rooms():
                     for event in pygame.event.get():
                         if event.type == pygame.KEYDOWN:
                             if event.key == K_RETURN:
-                                print("enter")
                                 return
                         
                         
 
 
         elif room_randomizer == 3 or room_randomizer == 4:
-            screen.blit(b1 , (0,0))
             input_rect = pygame.Rect(10,10,730,40)
             pygame.draw.rect(screen,color,input_rect,False ,10)
             pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
             blitlines(screen, f"Bakom dörren fanns {monster.monster_types()} som attackerar dig", userfont, textcolor, 20, 850)
-            pygame.display.update()
             while True:
-                if monster.monster_strenght > player.strenght + sum(player.item_bonus):
-                    player.player_hit()
-                    screen.blit(b1 , (0,0))
-                    input_rect = pygame.Rect(10,10,730,40)
-                    pygame.draw.rect(screen,color,input_rect,False ,10)
-                    pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                    blitlines(screen, f"Du förlorade mot {monster.monster_name}, -1 HP", userfont, textcolor, 20, 850)
-                    blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-                    pygame.display.update()
-                    while True:
-                        for event in pygame.event.get():
-                            if event.type == pygame.KEYDOWN:
-                                if event.key == K_RETURN:
-                                    print("enter")
-                                    return
+                if monster.monster_name == "en Goblin":
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Goblin.jpg")
+                    screen.blit(b2 , (0,0))
+                    monster_result()
+                    return
+                if monster.monster_name == "en Slime":
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Slime.jpg")
+                    screen.blit(b2 , (0,0))
+                    monster_result()
+                    return
+                if monster.monster_name == "ett Skelett":
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Skelett.jpg")
+                    screen.blit(b2 , (0,0))
+                    monster_result()
+                    return
+                if monster.monster_name == "ett Troll":
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
+                    screen.blit(b2 , (0,0))
+                    monster_result()
+                    return
+                if monster.monster_name == "en Golem":
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
+                    screen.blit(b2 , (0,0))
+                    monster_result()
+                    return
+                if monster.monster_name == "en Basilisk":
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
+                    screen.blit(b2 , (0,0))
+                    monster_result()
+                    return
+                if monster.monster_name == "en Drake":
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
+                    screen.blit(b2 , (0,0))
+                    monster_result()
+                    return
                 else:
-                    screen.blit(b1 , (0,0))
-                    input_rect = pygame.Rect(10,10,730,40)
-                    pygame.draw.rect(screen,color,input_rect,False ,10)
-                    pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                    blitlines(screen, f"Du besegrade {monster.monster_name}, +1 LVL", userfont, textcolor, 20, 850)
-                    blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
+                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Minotaur.jpg")
+                    screen.blit(b2 , (0,0))
                     pygame.display.update()
-                    player.player_level_up()
-                    while True:
-                        for event in pygame.event.get():
-                            if event.type == pygame.KEYDOWN:
-                                if event.key == K_RETURN:
-                                    print("enter")
-                                    return
+                    monster_result()
+                    return
 
         else:
             screen.blit(b1 , (0,0))
@@ -213,14 +279,12 @@ def rooms():
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
                         if event.key == K_RETURN:
-                            print("enter")
                             return
 
 def retun_input():
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == K_RETURN:
-                print("enter")
                 return
                 
 def menu_text_appaering():
@@ -235,7 +299,6 @@ def clear_screen():
     system("cls || clear")
 
 def show_inventory_text():
-    print(player.show_inventory())
     screen.blit(b1 , (0,0))
     input_rect = pygame.Rect(10,10,730,160)
     pygame.draw.rect(screen,color,input_rect,False ,10)
@@ -247,11 +310,9 @@ def show_inventory_text():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == K_RETURN:
-                    print("enter")
                     return
 
 def show_stat_text():
-    print(player.show_stats())
     screen.blit(b1 , (0,0))
     input_rect = pygame.Rect(10,10,730,100)
     pygame.draw.rect(screen,color,input_rect,False ,10)
@@ -262,7 +323,6 @@ def show_stat_text():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == K_RETURN:
-                    print("enter")
                     return
 
 def blitlines(surf, text, renderer, color, x, y):
@@ -279,12 +339,40 @@ def blitlines_RETURN(surf, text, renderer, color, x, y):
         txt_surface = renderer.render(ll, True, color)
         surf.blit(txt_surface, (input_rect.x +655, input_rect.y +10 +(i*h)))
 
+def monster_result():
+    while True:
+        if monster.monster_strenght > player.strenght + sum(player.item_bonus):
+            player.player_hit()
+            input_rect = pygame.Rect(10,10,730,40)
+            pygame.draw.rect(screen,color,input_rect,False ,10)
+            pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
+            blitlines(screen, f"Du förlorade mot {monster.monster_name}, -1 HP", userfont, textcolor, 20, 850)
+            blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
+            pygame.display.update()
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == K_RETURN:
+                            return
+        else:
+            input_rect = pygame.Rect(10,10,730,40)
+            pygame.draw.rect(screen,color,input_rect,False ,10)
+            pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
+            blitlines(screen, f"Du besegrade {monster.monster_name}, +1 LVL", userfont, textcolor, 20, 850)
+            blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
+            pygame.display.update()
+            player.player_level_up()
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == K_RETURN:
+                            return
+
 player = Player(10)
 item = Item()
 monster = Monster()
 max_lifes = 10
 
-#pygame.init()
 background_colour = (192, 192, 192)
 textcolor = (255, 255, 255)
 screen = pygame.display.set_mode((750, 545))
@@ -334,31 +422,23 @@ while True:
                                 sys.exit()
 
                             if event.type == pygame.KEYDOWN:
-                                if event.key == K_o:
-                                    print("hello")
-                                    menu_text_appaering()
-
                                 if event.key == K_s:
                                     show_stat_text()
                                     menu_text_appaering()
 
                                 if event.key == K_i:
-                                    print("enter har tryckts")
                                     show_inventory_text()
                                     menu_text_appaering()
 
                                 if event.key == K_h:
-                                    print("enter har tryckts")
                                     rooms()
                                     menu_text_appaering()
 
                                 if event.key == K_m:
-                                    print("enter har tryckts")
                                     rooms()
                                     menu_text_appaering()
 
                                 if event.key == K_v:
-                                    print("enter har tryckts")
                                     rooms()
                                     menu_text_appaering()
                                             
