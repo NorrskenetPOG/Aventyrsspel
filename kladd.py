@@ -1,8 +1,5 @@
-import random as rand,sys,time,pygame
+import random as rand,sys,time
 from os import system
-from pygame.constants import K_0, K_1, K_2, K_3, K_4, K_RETURN, K_b, K_h, K_i, K_m, K_s, K_v
-
-pygame.init()
 
 class Player():
     def __init__(self, lifes):
@@ -13,12 +10,6 @@ class Player():
         self.strenght = 5
         self.inventory = []
         self.item_bonus = []
-
-    def show_stats(self):
-        self.stat_text = ""
-        while True:
-            self.stat_text = f"{text}    LVL.{player.current_level}\n\nHP:  [{player.lifes}/{max_lifes}]\nSTR: [{player.strenght + sum(player.item_bonus)}]                                                  -ENTER"
-            return self.stat_text
 
     def player_hit(self):
         self.lifes -= 1
@@ -80,378 +71,111 @@ def rooms():
     room_randomizer = rand.choice(room_list)
 
     while True:
+        clear_screen()
         if room_randomizer == 1 or room_randomizer == 2:
-            player.chest()
-            if len(player.inventory) >= 6:
-                input_rect = pygame.Rect(10,10,730,200)
-                pygame.draw.rect(screen,color,input_rect,False ,10)
-                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                blitlines(screen, f"Du måste slänga [{player.inventory[5]} +{player.item_bonus[5]} STR] som du hittade [S] eller\nbyta ut det [B]\n\n{player.show_inventory()}", userfont, textcolor, 20, 850)
-                pygame.display.update()
-                while True:
-                    for event in pygame.event.get():
-                        if event.type == pygame.QUIT:
-                            sys.exit()
-                        if event.type == pygame.KEYDOWN:
-                            if event.key == K_b:
-                                screen.blit(b1 , (0,0))
-                                input_rect = pygame.Rect(10,10,730,180)
-                                pygame.draw.rect(screen,color,input_rect,False ,10)
-                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                blitlines(screen, f"Välj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n\n{player.show_inventory()}", userfont, textcolor, 20, 850)
-                                pygame.display.update()
-                                while True:
-                                    for event in pygame.event.get():
-                                        if event.type == pygame.KEYDOWN:
-                                            if event.key == K_0:
-                                                screen.blit(b1 , (0,0))
-                                                input_rect = pygame.Rect(10,10,730,40)
-                                                pygame.draw.rect(screen,color,input_rect,False ,10)
-                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                                blitlines(screen, f"Du bytte [{player.inventory[0]} +{player.item_bonus[0]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
-                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-                                                pygame.display.update()
-                                                clear_screen()
-                                                player.inventory.pop(0)
-                                                player.item_bonus.pop(0)
-                                                while True:
-                                                    for event in pygame.event.get():
-                                                        if event.type == pygame.KEYDOWN:
-                                                            if event.key == K_RETURN:
-                                                                return
-                                            if event.key == K_1:
-                                                screen.blit(b1 , (0,0))
-                                                input_rect = pygame.Rect(10,10,730,40)
-                                                pygame.draw.rect(screen,color,input_rect,False ,10)
-                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                                blitlines(screen, f"Du bytte [{player.inventory[1]} +{player.item_bonus[1]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
-                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-                                                pygame.display.update()
-                                                clear_screen()
-                                                player.inventory.pop(1)
-                                                player.item_bonus.pop(1)
-                                                while True:
-                                                    for event in pygame.event.get():
-                                                        if event.type == pygame.KEYDOWN:
-                                                            if event.key == K_RETURN:
-                                                                return
-                                            if event.key == K_2:
-                                                screen.blit(b1 , (0,0))
-                                                input_rect = pygame.Rect(10,10,730,40)
-                                                pygame.draw.rect(screen,color,input_rect,False ,10)
-                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                                blitlines(screen, f"Du bytte [{player.inventory[2]} +{player.item_bonus[2]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
-                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-                                                pygame.display.update()
-                                                clear_screen()
-                                                player.inventory.pop(2)
-                                                player.item_bonus.pop(2)
-                                                while True:
-                                                    for event in pygame.event.get():
-                                                        if event.type == pygame.KEYDOWN:
-                                                            if event.key == K_RETURN:
-                                                                return
-                                            if event.key == K_3:
-                                                screen.blit(b1 , (0,0))
-                                                input_rect = pygame.Rect(10,10,730,40)
-                                                pygame.draw.rect(screen,color,input_rect,False ,10)
-                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                                blitlines(screen, f"Du bytte [{player.inventory[3]} +{player.item_bonus[3]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
-                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-                                                pygame.display.update()
-                                                clear_screen()
-                                                player.inventory.pop(3)
-                                                player.item_bonus.pop(3)
-                                                while True:
-                                                    for event in pygame.event.get():
-                                                        if event.type == pygame.KEYDOWN:
-                                                            if event.key == K_RETURN:
-                                                                return
-                                            if event.key == K_4:
-                                                screen.blit(b1 , (0,0))
-                                                input_rect = pygame.Rect(10,10,730,40)
-                                                pygame.draw.rect(screen,color,input_rect,False ,10)
-                                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                                blitlines(screen, f"Du bytte [{player.inventory[4]} +{player.item_bonus[4]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
-                                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-                                                pygame.display.update()
-                                                clear_screen()
-                                                player.inventory.pop(4)
-                                                player.item_bonus.pop(4)
-                                                while True:
-                                                    for event in pygame.event.get():
-                                                        if event.type == pygame.KEYDOWN:
-                                                            if event.key == K_RETURN:
-                                                                return
-                                        else:
-                                            continue
-         
-                        if event.type == pygame.KEYDOWN:
-                            if event.key == K_s:
-                                screen.blit(b1 , (0,0))
-                                input_rect = pygame.Rect(10,10,730,40)
-                                pygame.draw.rect(screen,color,input_rect,False ,10)
-                                pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                                blitlines(screen, f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]", userfont, textcolor, 20, 850)
-                                blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-                                pygame.display.update()
-                                player.inventory.pop(5)
-                                player.item_bonus.pop(5)
-                                while True:
-                                    for event in pygame.event.get():
-                                        if event.type == pygame.KEYDOWN:
-                                            if event.key == K_RETURN:
-                                                return
-
-            else:
-                while True:
-                    screen.blit(b1 , (0,0))
-                    input_rect = pygame.Rect(10,10,730,40)
-                    pygame.draw.rect(screen,color,input_rect,False ,10)
-                    pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-                    blitlines(screen, f"Bakom dörren fanns en kista med en skatt                  -ENTER", userfont, textcolor, 20, 850)
-                    pygame.display.update()
-                    for event in pygame.event.get():
-                        if event.type == pygame.KEYDOWN:
-                            if event.key == K_RETURN:
-                                return
-                        
-                        
-
+            delay_print(f"Bakom dörren fanns en kista med en skatt\n")
+            while True:
+                player.chest()
+                if len(player.inventory) >= 6:
+                    print(f"Ditt inventory är fullt\n\n--------------------------\n{player.show_inventory()}")
+                    choice_inventory = input(f"\nDu måste slänga [{player.inventory[5]} +{player.item_bonus[5]} STR] som du hittade [S] eller byta ut det [B] -> ")
+                    if choice_inventory == "B" or choice_inventory == "b":
+                        while True:
+                            clear_screen()
+                            print(f"Välj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
+                            print(f"--------------------------\n{player.show_inventory()}")
+                            change_inventory = str(input(delay_print(f"\n[0 - 4] -> ")))
+                            if change_inventory == "0" or change_inventory == "1" or change_inventory == "2" or change_inventory == "3" or change_inventory == "4":
+                                clear_screen()
+                                inventory_index_to_pop = int(change_inventory)
+                                print(f"Du bytte [{player.inventory[inventory_index_to_pop]} +{player.item_bonus[inventory_index_to_pop]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]")
+                                player.inventory.pop(inventory_index_to_pop)
+                                player.item_bonus.pop(inventory_index_to_pop)
+                                break
+                            else:
+                                clear_screen()
+                                continue
+                        break   
+                    if choice_inventory == "S" or choice_inventory == "s":
+                        clear_screen()
+                        delay_print(f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
+                        player.inventory.pop(5)
+                        player.item_bonus.pop(5)
+                        break
+                    else:
+                        clear_screen()
+                        continue
+                else:
+                    break                  
+            break
 
         elif room_randomizer == 3 or room_randomizer == 4:
-            input_rect = pygame.Rect(10,10,730,40)
-            pygame.draw.rect(screen,color,input_rect,False ,10)
-            pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-            blitlines(screen, f"Bakom dörren fanns {monster.monster_types()} som attackerar dig", userfont, textcolor, 20, 850)
+            delay_print(f"Bakom dörren fanns {monster.monster_types()} som attackerar dig")
             while True:
-                if monster.monster_name == "en Goblin":
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Goblin.jpg")
-                    screen.blit(b2 , (0,0))
-                    monster_result()
-                    return
-                if monster.monster_name == "en Slime":
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Slime.jpg")
-                    screen.blit(b2 , (0,0))
-                    monster_result()
-                    return
-                if monster.monster_name == "ett Skelett":
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Skelett.jpg")
-                    screen.blit(b2 , (0,0))
-                    monster_result()
-                    return
-                if monster.monster_name == "ett Troll":
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
-                    screen.blit(b2 , (0,0))
-                    monster_result()
-                    return
-                if monster.monster_name == "en Golem":
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
-                    screen.blit(b2 , (0,0))
-                    monster_result()
-                    return
-                if monster.monster_name == "en Basilisk":
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
-                    screen.blit(b2 , (0,0))
-                    monster_result()
-                    return
-                if monster.monster_name == "en Drake":
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Drake.jpg")
-                    screen.blit(b2 , (0,0))
-                    monster_result()
-                    return
+                if monster.monster_strenght > player.strenght + sum(player.item_bonus):
+                    player.player_hit()
+                    delay_print(f"\nDu förlorade mot {monster.monster_name}, -1 HP\n")
+                    break
                 else:
-                    b2 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\Minotaur.jpg")
-                    screen.blit(b2 , (0,0))
-                    pygame.display.update()
-                    monster_result()
-                    return
+                    delay_print(f"\nDu besegrade {monster.monster_name}, +1 LVL\n")
+                    player.player_level_up()
+                    break
+            break
 
         else:
-            screen.blit(b1 , (0,0))
-            input_rect = pygame.Rect(10,10,730,40)
-            pygame.draw.rect(screen,color,input_rect,False ,10)
-            pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-            blitlines(screen, f"Du tog skada av en fälla, -1 HP                           -ENTER", userfont, textcolor, 20, 850)
-            pygame.display.update()
+            delay_print("Du tog skada av en fälla, -1 HP\n")
             player.player_hit()
-            while True:
-                for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == K_RETURN:
-                            return
-
-def retun_input():
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == K_RETURN:
-                return
-                
-def menu_text_appaering():
-    screen.blit(b1 , (0,0))
-    input_rect = pygame.Rect(10,10,730,160)
-    pygame.draw.rect(screen,color,input_rect,False ,10)
-    pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-    blitlines(screen, "Du har kommit till ett rum med tre dörrar...\n\nSe spelarinfo                      [S]\nÖppna inventory                    [I]\nGå genom vänster dörr              [V]\nGå genom mitten dörren             [M]\nGå genom höger dörr                [H]", userfont, textcolor, 20, 850)
-    pygame.display.update()
+            break
 
 def clear_screen():
     system("cls || clear")
 
-def show_inventory_text():
-    screen.blit(b1 , (0,0))
-    input_rect = pygame.Rect(10,10,730,160)
-    pygame.draw.rect(screen,color,input_rect,False ,10)
-    pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-    blitlines(screen, f"Inventory\n{player.show_inventory()}", userfont, textcolor, 20, 850)
-    blitlines(screen, "\n\n\n\n\n\n                                                          -ENTER", userfont, textcolor, 20, 850)
-    pygame.display.update()
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == K_RETURN:
-                    return
-
-def show_stat_text():
-    screen.blit(b1 , (0,0))
-    input_rect = pygame.Rect(10,10,730,100)
-    pygame.draw.rect(screen,color,input_rect,False ,10)
-    pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-    blitlines(screen, player.show_stats(), userfont, textcolor, 20, 850)
-    pygame.display.update()
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == K_RETURN:
-                    return
-
-def blitlines(surf, text, renderer, color, x, y):
-    h = renderer.get_height()
-    lines = text.split('\n')
-    for i, ll in enumerate(lines):
-        txt_surface = renderer.render(ll, True, color)
-        surf.blit(txt_surface, (input_rect.x +15, input_rect.y +10 +(i*h)))
-        
-def blitlines_RETURN(surf, text, renderer, color, x, y):
-    h = renderer.get_height()
-    lines = text.split('\n')
-    for i, ll in enumerate(lines):
-        txt_surface = renderer.render(ll, True, color)
-        surf.blit(txt_surface, (input_rect.x +655, input_rect.y +10 +(i*h)))
-
-def monster_result():
-    while True:
-        if monster.monster_strenght > player.strenght + sum(player.item_bonus):
-            player.player_hit()
-            input_rect = pygame.Rect(10,10,730,40)
-            pygame.draw.rect(screen,color,input_rect,False ,10)
-            pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-            blitlines(screen, f"Du förlorade mot {monster.monster_name}, -1 HP", userfont, textcolor, 20, 850)
-            blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-            pygame.display.update()
-            while True:
-                for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == K_RETURN:
-                            return
-        else:
-            input_rect = pygame.Rect(10,10,730,40)
-            pygame.draw.rect(screen,color,input_rect,False ,10)
-            pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-            blitlines(screen, f"Du besegrade {monster.monster_name}, +1 LVL", userfont, textcolor, 20, 850)
-            blitlines_RETURN(screen, "-ENTER", userfont, textcolor, 20, 850)
-            pygame.display.update()
-            player.player_level_up()
-            while True:
-                for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == K_RETURN:
-                            return
+def delay_print(meningar):
+    for tecken in meningar:
+        sys.stdout.write(tecken)
+        sys.stdout.flush()
+        time.sleep(0.005)
+    return ""
 
 player = Player(10)
 item = Item()
 monster = Monster()
 max_lifes = 10
 
-background_colour = (192, 192, 192)
-textcolor = (255, 255, 255)
-screen = pygame.display.set_mode((750, 545))
-userfont = pygame.font.SysFont("consolas", 20) #arialblack #consolas #cambria
-input_rect = pygame.Rect(10,810,360,260)
-color = (0,128,128)
-
-screen.fill(background_colour)
-b1 = pygame.image.load(r"C:\Users\Elev\Pictures\Saved Pictures\pixldungeon.png")
-screen.blit(b1 , (0,0))
-
-pygame.display.flip()
-
-clock = pygame.time.Clock()
-input_box = pygame.Rect(320, 35, 140, 750)
-active = True
-text = ""
-done = False
+print("\033[1;32;40m")
+clear_screen()
+character_name = str(input(delay_print("Vad heter din karaktär?\nSkriv in för att starta -> ")))
+clear_screen()
 
 while True:
-    for event in pygame.event.get():
-        screen.fill((30, 30, 30))
-        input_rect = pygame.Rect(10,10,730,60)
-        pygame.draw.rect(screen,color,input_rect,False ,10)
-        pygame.draw.rect(screen,(95,158,160),input_rect,2 ,10)
-        blitlines(screen, "Vad heter din karaktär?\nSkriv in för att starta ->                                -ENTER", userfont, textcolor, 20, 850)
-        pygame.display.update()
-        txt_surface = userfont.render(text, True, textcolor)
-        # Resize the box if the text is too long.
-        width = max(730, txt_surface.get_width()+10)
-        input_box.w = width
-        # Blit the text.
-        screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
-        # Blit the input_box rect.
+    print("\n--------------------------------------------\nDu har kommit till ett rum med tre dörrar...\n\n    Se spelarinfo                    [S]\n    Öppna inventory                  [I]\n    Gå genom vänster dörr            [V]\n    Gå genom mitten dörren           [M]\n    Gå genom höger dörr              [H]\n--------------------------------------------")
+    choice = input(delay_print("Gör ett val -> ")).lower()
+    
+    if choice == "s":
+        clear_screen()
+        print(f"----------------\n{character_name}    LVL.{player.current_level}\n\nHP:  [{player.lifes}/{max_lifes}]\nSTR: [{player.strenght + sum(player.item_bonus)}]\n----------------")
+        
+    elif choice == "i":
+        clear_screen()
+        print(f"--------------------------\nInventory\n{player.show_inventory()}\n--------------------------")
 
-        pygame.display.flip()
-        clock.tick(100)
-        if event.type == pygame.QUIT:
-            sys.exit()
-        if event.type == pygame.KEYDOWN:
-            if active:
-                if event.key == pygame.K_RETURN:
-                    menu_text_appaering()
-                    while True:
-                        for event in pygame.event.get():
-                            if event.type == pygame.QUIT:
-                                sys.exit()
+    elif choice == "v":
+        rooms()
 
-                            if event.type == pygame.KEYDOWN:
-                                if event.key == K_s:
-                                    show_stat_text()
-                                    menu_text_appaering()
+    elif choice == "m":
+        rooms()
+        
+    elif choice == "h":
+        rooms()
+    
+    else:
+        clear_screen()
+        continue
 
-                                if event.key == K_i:
-                                    show_inventory_text()
-                                    menu_text_appaering()
+    if player.current_level == player.max_level:
+        delay_print(f"\nGrattis, du har VUNNIT spelet\n\n")
+        break
 
-                                if event.key == K_h:
-                                    rooms()
-                                    menu_text_appaering()
-
-                                if event.key == K_m:
-                                    rooms()
-                                    menu_text_appaering()
-
-                                if event.key == K_v:
-                                    rooms()
-                                    menu_text_appaering()
-                                            
-
-                                if player.current_level == player.max_level:
-                                    print(f"\nGrattis, du har VUNNIT spelet\n\n")
-                                    break
-
-                                if player.lifes == 0:
-                                    print(f"\n{player.lifes}/{max_lifes} HP kvar, spel slut, du förlorade\n\n")
-                                    pygame.quit
-
-                elif event.key == pygame.K_BACKSPACE:
-                    text = text[:-1]
-                else:
-                    text += event.unicode
+    if player.lifes == 0:
+        print(f"\n{player.lifes}/{max_lifes} HP kvar, spel slut, du förlorade\n\n")
+        break
