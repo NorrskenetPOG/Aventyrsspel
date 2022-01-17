@@ -245,6 +245,6 @@ while True:
         delay_print(f"\nGrattis, du har VUNNIT spelet\n\n")
         break
 
-    if player.lifes == 0:
-        print(f"\n{player.lifes}/{max_lifes} HP kvar, spel slut, du förlorade\n\n")
+    if player.lifes == 9.5:
+        print(f"\n{player.lifes: .0f}/{max_lifes} HP kvar, spel slut, du förlorade\n\n")
         break
