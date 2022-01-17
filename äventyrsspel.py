@@ -102,12 +102,18 @@ class Monster():
             return self.monster_name
 
 def rooms():
-    room_list = [1, 2, 3, 4, 5]
-    room_randomizer = rand.choice(room_list)
+    """
+    Funktionen ska slumpmässigt välja en dörr, fast använder oss av weights för att få sannolikheter.
+    Avataren kan antingen hitta en kista, ett monster eller en fälla.
+    Chest() - öppnar chest funktionen och ger ett item. 
+    Ifall avataren har fullt inventory så behövs det slänga eller bytas ut.
+    """
+    room_list = [1, 2, 3]
+    room_randomizer = rand.choices(room_list, weights=(2, 2, 1), k=1)[0]
 
     while True:
         clear_screen()
-        if room_randomizer == 1 or room_randomizer == 2:
+        if room_randomizer == 1:
             print("\033[1;33;40m")
             delay_print(f"Bakom dörren fanns en kista med en skatt\n")
             while True:
@@ -146,7 +152,7 @@ def rooms():
                     break                  
             break
 
-        elif room_randomizer == 3 or room_randomizer == 4:
+        elif room_randomizer == 2:
             delay_print(f"\nBakom dörren fanns {monster.monster_types()} som attackerar dig")
             while True:
                 if monster.monster_strenght > player.strenght + sum(player.item_bonus):
@@ -200,7 +206,6 @@ ANSI escape-kod som sätter texten till en färg;
 Förekomer flera gånger i koden för att ändra färger
 """
 
-#Huvudprogram
 clear_screen()
 character_name = str(input(delay_print("Vad heter din karaktär?\nSkriv in för att starta -> ")))
 clear_screen()
