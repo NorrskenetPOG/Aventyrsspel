@@ -16,9 +16,9 @@ class Player():
         self.item_bonus = []
 
     def player_hit(self):
-        '''
+        """
         Funktion som minskar livet på avataren när hen blir träffad.
-        '''
+        """
         self.lifes -= 0.5
     
     def show_inventory(self):
@@ -33,9 +33,9 @@ class Player():
         return self.inventory_layout
 
     def player_level_up(self):
-        '''
+        """
         Funktion lägger till xp till karaktären och när karaktären når max xp för en nivå ökar nivån och gränsen för att ranka upp (xp_max).
-        '''
+        """
         self.xp += 5
         
         if self.xp >= player.max_xp:
@@ -54,17 +54,17 @@ class Item():
         self.bonus_range = range(1, 6)
 
     def chest(self):
-        '''
+        """
         Funktion som lägger in ett vanligt item plus ett bonus item när avataren hittar en kista.
-        '''
+        """
         player.inventory.append(str(rand.choice(item.item_names)))
         player.item_bonus.append(int(rand.choice(item.bonus_range)))
 
 class Monster():
     def __init__(self):
-        '''
+        """
         Funktionen initsierar klassen Monster's atributer och startvärden.
-        '''
+        """
         self.strenght_range = range(0, 23)
 
     def monster_types(self):
@@ -175,9 +175,9 @@ def rooms():
             break
 
 def clear_screen():
-    ''' 
+    """
     Winows cls kommando för att rensa skärmen.
-    '''
+    """
     system("cls || clear")
 
 def delay_print(meningar):
@@ -211,11 +211,11 @@ character_name = str(input(delay_print("Vad heter din karaktär?\nSkriv in för 
 clear_screen()
 
 while True:
-    '''
+    """
     Här är start menyn. Den loopar så länge avataren inte uppnår max level eller har noll liv. 
     Här kan spelaren välja ifall hen vill se information såsom namn, level, liv och styrka.
     Hen kan även öppna sitt inventory härifrån, och välja på tre dörrar som alla gör samma sak, öppnar rooms funtkionen.
-    '''
+    """
     print("\033[1;37;40m")
     print("\n--------------------------------------------\nDu har kommit till ett rum med tre dörrar...\n\n    Se spelarinfo                    [S]\n    Öppna inventory                  [I]\n    Gå genom vänster dörr            [V]\n    Gå genom mitten dörren           [M]\n    Gå genom höger dörr              [H]\n--------------------------------------------")
     choice = input(delay_print("Gör ett val -> ")).lower()
