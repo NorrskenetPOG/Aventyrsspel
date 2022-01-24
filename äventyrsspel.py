@@ -29,7 +29,7 @@ class Player():
         self.inventory_layout = ""
         lists = zip(player.inventory[0:5], player.item_bonus[0:5])
         for index, list_content in enumerate(lists):
-            self.inventory_layout += f"\n{index}. [{list_content[0]} +{list_content[1]} STR]"
+            self.inventory_layout += f"\n{index+1}. [{list_content[0]} +{list_content[1]} STR]" 
         return self.inventory_layout
 
     def player_level_up(self):
@@ -50,7 +50,7 @@ class Item():
     Funktionen initsierar klassen Item's atributer och startvärden.
     """
     def __init__(self):
-        self.item_names = ["Meme Blade", "Diamondsword", "Gravitygun", "Energisvärd", "Pizzaskärare", "BFG-9000", "Styrke-dryck", "Styrke-emblem", "Railgun", "Blades of kaos", "Matersword", "Köttbullsmacka", "Baguettespjut"]
+        self.item_names = ["Meme Blade", "Diamondsword", "Gravitygun", "Energisvärd", "Pizzaskärare", "BFG-9000", "Styrke-dryck", "Styrke-emblem", "Railgun", "Blades of kaos", "Matersword", "Köttbullsmacka", "Baguettespjut", "PP-svärd"]
         self.bonus_range = range(1, 6)
 
     def chest(self):
@@ -121,16 +121,16 @@ def rooms():
                 if len(player.inventory) >= 6:
                     print("\033[1;37;40m")
                     print(f"\nDitt inventory är fullt\n\n--------------------------\n{player.show_inventory()}")
-                    choice_inventory = input(f"\nVälj för [{player.inventory[5]} +{player.item_bonus[5]} STR] att [S] slänga eller [B] byta -> ")
-                    if choice_inventory == "B" or choice_inventory == "b":
+                    choice_inventory = input(f"\nVälj för [{player.inventory[5]} +{player.item_bonus[5]} STR] att [S] slänga eller [B] byta -> ").lower()
+                    if choice_inventory == "b":
                         while True:
                             clear_screen()
                             print(f"Välj vilket vapen du vill byta ut mot [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
                             print(f"--------------------------\n{player.show_inventory()}")
-                            change_inventory = str(input(delay_print(f"\n[0 - 4] -> ")))
-                            if change_inventory == "0" or change_inventory == "1" or change_inventory == "2" or change_inventory == "3" or change_inventory == "4":
+                            change_inventory = str(input(delay_print(f"\n[1 - 5] -> ")))
+                            if change_inventory in ['1','2','3','4','5']:
                                 clear_screen()
-                                inventory_index_to_pop = int(change_inventory)
+                                inventory_index_to_pop = int(change_inventory) -1
                                 print(f"Du bytte [{player.inventory[inventory_index_to_pop]} +{player.item_bonus[inventory_index_to_pop]} STR] mot [{player.inventory[5]} +{player.item_bonus[5]} STR]")
                                 player.inventory.pop(inventory_index_to_pop)
                                 player.item_bonus.pop(inventory_index_to_pop)
@@ -139,7 +139,7 @@ def rooms():
                                 clear_screen()
                                 continue
                         break   
-                    if choice_inventory == "S" or choice_inventory == "s":
+                    if choice_inventory == "s":
                         clear_screen()
                         delay_print(f"Du slängde [{player.inventory[5]} +{player.item_bonus[5]} STR]\n")
                         player.inventory.pop(5)
@@ -245,6 +245,6 @@ while True:
         delay_print(f"\nGrattis, du har VUNNIT spelet\n\n")
         break
 
-    if player.lifes == 9.5:
+    if player.lifes == 0:
         print(f"\n{player.lifes: .0f}/{max_lifes} HP kvar, spel slut, du förlorade\n\n")
         break
