@@ -162,7 +162,7 @@ def rooms():
                     break
                 else:
                     print("\033[1;92;40m")
-                    delay_print(f"Du besegrade {monster.monster_name}, +6 XP\n")
+                    delay_print(f"Du besegrade {monster.monster_name}, +5 XP\n")
                     player.player_level_up()
                     break
             break
